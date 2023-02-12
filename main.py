@@ -49,10 +49,11 @@ def main(base: str, head: str):
         output_lines.append("## Chores 👷‍♂️")
         output_lines.extend(chore)
 
-    # use 'nl' as delimeiter for gh actions output
-    # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+
     output = "\n".join(output_lines)
 
+    # use 'nl' as delimeiter for gh actions output
+    # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
     output_file = Path(os.environ.get("GITHUB_OUTPUT", "output.txt"))
     output_file.write_text(f"changelog<<nl\n{output}\nnl")
 
