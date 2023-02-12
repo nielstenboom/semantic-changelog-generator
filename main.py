@@ -7,6 +7,10 @@ COMMIT_HASH_LENGTH = 8
 
 def run_command(command: str):
     result = subprocess.run(command.split(" "), stdout=subprocess.PIPE)
+
+    if result.returncode != 0:
+        raise Exception(f"Command failed: {command}")
+
     return result.stdout.decode("utf-8")
 
 def main(base: str, head: str):
