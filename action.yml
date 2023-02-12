@@ -1,0 +1,20 @@
+name: 'Semantic Changelog Generator'
+description: 'Simple action that generates a pretty changelog from semantic commits'
+inputs:
+  base:
+    description: 'Base ref for git log'
+    required: true
+    default: ''
+  head:
+    description: 'Head ref for git log'
+    required: true
+    default: ''
+outputs:
+  changelog:
+    description: 'The generated changelog'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.base }}
+    - ${{ inputs.head }}
