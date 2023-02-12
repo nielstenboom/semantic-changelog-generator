@@ -1,6 +1,9 @@
 # Semantic changelog generator
 
-This action prints generates a pretty changelog from semantic commits
+This action prints generates a pretty changelog from semantic commits.
+
+![example](example.png)
+
 
 ## Inputs
 
