@@ -8,10 +8,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-
-    - name: Get branch name
-      id: get_branch_name
-      uses: tj-actions/branch-names@v6
       
       # use the action as it is on the current branch of this PR
     - name: Generate changelog
@@ -21,8 +17,17 @@ jobs:
         base: '2fd5d62' # first commit of this repo
         head: 'origin/${{ steps.get_branch_name.outputs.current_branch }}'
 
-    - name: Get the changelog
+    - name: Assertions
+      shell: python
       run: |
-        cat << "EOF"
+        changelog = """
         ${{ steps.changelog.outputs.changelog }}
-        EOF
+        """
+        print(changelog)
+
+        assert "## Features 🔨" in changelog
+        assert "## Fixes 🐛" in changelog
+        assert "## Other changes 📝" in changelog
+        assert "## Chores 👷‍♂️" in changelog
+
+        assert len(changelog.split("\n")) > 20
