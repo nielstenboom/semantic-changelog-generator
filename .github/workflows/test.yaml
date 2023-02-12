@@ -8,6 +8,10 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
+    - name: Get branch name
+      id: get_branch_name
+      uses: tj-actions/branch-names@v6
       
       # use the action as it is on the current branch of this PR
     - name: Generate changelog
