@@ -16,7 +16,7 @@ jobs:
       # use the action as it is on the current branch of this PR
     - name: Generate changelog
       id: changelog
-      uses: "nielstenboom/semantic-changelog-generator@${{ steps.get_branch_name.outputs.current_branch }}"
+      uses: ./
       with:
         base: '2fd5d62' # first commit of this repo
         head: 'origin/${{ steps.get_branch_name.outputs.current_branch }}'
