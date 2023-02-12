@@ -52,7 +52,7 @@ def main(base: str, head: str):
     output = "%0A".join(output_lines) # newline character for gh actions output
 
     output_file = Path(os.environ.get("GITHUB_OUTPUT", "output.txt"))
-    output_file.write_text(f"changelog={output}")
+    output_file.write_text(f"changelog<<nl\n{output}\nnl")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
