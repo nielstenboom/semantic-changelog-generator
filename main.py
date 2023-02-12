@@ -51,7 +51,7 @@ def main(base: str, head: str):
 
     # use 'nl' as delimeiter for gh actions output
     # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
-    output = "nl".join(output_lines)
+    output = "\n".join(output_lines)
 
     output_file = Path(os.environ.get("GITHUB_OUTPUT", "output.txt"))
     output_file.write_text(f"changelog<<nl\n{output}\nnl")
