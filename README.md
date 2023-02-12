@@ -30,7 +30,7 @@ The generated changelog
   with:
     fetch-depth: 0
 
-- uses: nielstenboom/semantic-changelog-generator@main
+- uses: nielstenboom/semantic-changelog-generator@v1.0.0
   id: changelog
   with:
     base: main
@@ -53,7 +53,7 @@ NOTE: if you want to enter branches with forward slashes in them, you should add
     fetch-depth: 0
 
 # point to branch with forward slashes with 'origin' prepended
-- uses: nielstenboom/semantic-changelog-generator@main
+- uses: nielstenboom/semantic-changelog-generator@v1.0.0
   id: changelog
   with:
     base: v1.0.0
