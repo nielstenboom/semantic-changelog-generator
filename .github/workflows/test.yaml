@@ -1,0 +1,28 @@
+name: 'test action'
+on: 'pull_request'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Get branch name
+      id: get_branch_name
+      uses: tj-actions/branch-names@v6
+      
+      # use the action as it is on the current branch of this PR
+    - name: Generate changelog
+      id: changelog
+      uses: nielstenboom/semantic-changelog-generator@${{ steps.get_branch_name.outputs.current_branch }}
+      with:
+        base: '2fd5d62' # first commit of this repo
+        head: 'origin/${{ steps.get_branch_name.outputs.current_branch }}'
+
+    - name: Get the changelog
+      run: |
+        cat << "EOF"
+        ${{ steps.changelog.outputs.changelog }}
+        EOF
