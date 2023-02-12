@@ -3,6 +3,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+COMMIT_HASH_LENGTH = 8
+
 def run_command(command: str):
     result = subprocess.run(command.split(" "), stdout=subprocess.PIPE)
     return result.stdout.decode("utf-8")
@@ -10,13 +12,14 @@ def run_command(command: str):
 def main(base: str, head: str):
     run_command("git config --global --add safe.directory /github/workspace")
     result = run_command(f"git --no-pager log --oneline {base}...{head}")
+    
     feat = []
     fix = []
     chore = []
     other = []
 
     for line in result.split("\n"):
-        if len(line) < 8:
+        if len(line) < COMMIT_HASH_LENGTH:
             continue
         elif "feat:" in line:
             feat.append(line)
