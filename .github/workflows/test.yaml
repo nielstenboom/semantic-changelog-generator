@@ -1,0 +1,23 @@
+name: 'changelog'
+on: 'pull_request'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Generate changelog
+      id: changelog
+      uses: nielstenboom/semantic-changelog-generator@main
+      with:
+        base: '2fd5d62'
+        head: 'origin/niels/generate-readme-image'
+
+    - name: Get the changelog
+      run: |
+        cat << "EOF"
+        ${{ steps.changelog.outputs.changelog }}
+        EOF
