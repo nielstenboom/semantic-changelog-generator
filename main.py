@@ -3,10 +3,13 @@ from pathlib import Path
 import subprocess
 import sys
 
-def main(base: str, head: str):
-    command = f"git --no-pager log --oneline {base}...{head}"
+def run_command(command: str):
     result = subprocess.run(command.split(" "), stdout=subprocess.PIPE)
-    result = result.stdout.decode("utf-8")
+    return result.stdout.decode("utf-8")
+
+def main(base: str, head: str):
+    run_command("git config --global --add safe.directory /github/workspace")
+    result = run_command(f"git --no-pager log --oneline {base}...{head}")
     feat = []
     fix = []
     chore = []
