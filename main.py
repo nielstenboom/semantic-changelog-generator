@@ -52,10 +52,10 @@ def main(base: str, head: str):
 
     output = "\n".join(output_lines)
 
-    # use 'nl' as delimeiter for gh actions output
+    # use '<br>' as delimiter for gh actions output
     # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
     output_file = Path(os.environ.get("GITHUB_OUTPUT", "output.txt"))
-    output_file.write_text(f"changelog<<nl\n{output}\nnl")
+    output_file.write_text(f"changelog<<<br>\n{output}\n<br>")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
