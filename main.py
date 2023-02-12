@@ -42,7 +42,7 @@ def main(base: str, head: str):
         output_lines.append("## Chores 👷‍♂️")
         output_lines.extend(chore)
 
-    output = "\n".join(output_lines) # newline character for gh actions output
+    output = "%0A".join(output_lines) # newline character for gh actions output
 
     output_file = Path(os.environ.get("GITHUB_OUTPUT", "output.txt"))
     output_file.write_text(f"output={output}")
