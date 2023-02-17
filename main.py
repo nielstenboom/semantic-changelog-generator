@@ -19,9 +19,10 @@ def is_semantic(prefix: str, line: str):
     Check if line is a semantic commit message of the form:
     <commit hash> <prefix>(<scope>): <message>
 
-    examples:
-    12345678 feat(backend): add new feature
-    12345678 feat: add new feature
+    examples of input lines:
+    
+        12345678 feat(backend): add new feature
+        12345678 feat: add new feature
     """
     return re.match(r"(.+)"+ prefix + r"(\(.+\))*\:.*", line) is not None
 
