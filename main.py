@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -13,6 +14,17 @@ def run_command(command: str):
 
     return result.stdout.decode("utf-8")
 
+def is_semantic(prefix: str, line: str):
+    """
+    Check if line is a semantic commit message of the form:
+    <commit hash> <prefix>(<scope>): <message>
+
+    examples:
+    12345678 feat(backend): add new feature
+    12345678 feat: add new feature
+    """
+    return re.match(r"(.+)"+ prefix + r"(\(.+\))*\:.*", line) is not None
+
 def main(base: str, head: str):
     run_command("git config --global --add safe.directory /github/workspace")
     result = run_command(f"git --no-pager log --oneline {base}...{head}")
@@ -25,12 +37,12 @@ def main(base: str, head: str):
     for line in result.split("\n"):
         if len(line) < COMMIT_HASH_LENGTH:
             continue
-        elif "feat:" in line:
+        elif is_semantic("feat",line):
             feat.append(line)
-        elif "fix:" in line:
+        elif is_semantic("fix",line):
             fix.append(line)
-        elif "chore:" in line:
-            chore.append(line)
+        elif is_semantic("chore",line):
+            feat.append(line)
         else:
             other.append(line)
 
