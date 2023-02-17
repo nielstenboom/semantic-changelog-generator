@@ -43,7 +43,7 @@ def main(base: str, head: str):
         elif is_semantic("fix",line):
             fix.append(line)
         elif is_semantic("chore",line):
-            feat.append(line)
+            chore.append(line)
         else:
             other.append(line)
 
