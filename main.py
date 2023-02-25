@@ -63,7 +63,7 @@ def main(base: str, head: str):
         output_lines.extend(chore)
 
 
-    project_remote = run_command(f"git config --local remote.origin.url")
+    project_remote = run_command(f"git config --local remote.origin.url").strip()
     # project_name = project_remote.split(":")[-1].replace(".git", "")
     compare_url = f"{project_remote}/compare/{base}...{head}"
 
