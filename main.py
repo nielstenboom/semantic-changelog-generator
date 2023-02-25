@@ -64,8 +64,8 @@ def main(base: str, head: str):
 
 
     project_remote = run_command(f"git config --local remote.origin.url")
-    project_name = project_remote.split(":")[-1].replace(".git", "")
-    compare_url = f"https://github.com/{project_name}/compare/{base}...{head}"
+    # project_name = project_remote.split(":")[-1].replace(".git", "")
+    compare_url = f"{project_remote}/compare/{base}...{head}"
 
     # add compare url to output as markdown url
     output_lines.append(f"\n\n\n[{base}...{head}]({compare_url})")
