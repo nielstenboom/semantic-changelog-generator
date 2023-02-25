@@ -67,7 +67,7 @@ def main(base: str, head: str):
 
     project_remote = run_command(f"git config --local remote.origin.url").strip()
     compare_url = f"{project_remote}/compare/{stripped_base}...{stripped_head}"
-    output_lines.append(f"\n\n\n[{stripped_base}...{stripped_head}]({compare_url})")
+    output_lines.append(f"\n\n[{stripped_base}...{stripped_head}]({compare_url})")
 
 
     output = "\n".join(output_lines)
